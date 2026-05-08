@@ -1,0 +1,15 @@
+/* Marker class — actual blur amount is applied via inline style per element */
+.pii-blur { /* intentionally empty */ }
+
+/* Crosshair cursor during click-to-blur mode */
+.pii-click-mode,
+.pii-click-mode * {
+  cursor: crosshair !important;
+}
+
+/* Red dashed outline on hover so user knows what they'll select */
+.pii-click-mode *:hover {
+  outline: 2px dashed #e74c3c !important;
+  outline-offset: 2px !important;
+  filter: none !important;
+}

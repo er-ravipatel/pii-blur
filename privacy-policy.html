@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — PII Blur</title>
+  <style>
+    body {
+      max-width: 720px;
+      margin: 60px auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #222;
+      padding: 0 24px;
+    }
+    h1 { font-size: 28px; color: #16213e; margin-bottom: 4px; }
+    h2 { font-size: 18px; color: #16213e; margin-top: 36px; }
+    .updated { color: #888; font-size: 14px; margin-bottom: 32px; }
+    a { color: #16213e; }
+  </style>
+</head>
+<body>
+
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: May 2026</p>
+
+  <p>
+    <strong>PII Blur</strong> is a Chrome browser extension that lets you blur
+    personal information — names, photos, addresses, and form fields — on any
+    website. This policy explains what data the extension handles and how.
+  </p>
+
+  <h2>Data we collect</h2>
+  <p>
+    <strong>None.</strong> PII Blur does not collect, transmit, or share any
+    personal data. The extension has no backend server and makes no network
+    requests of its own.
+  </p>
+
+  <h2>Data stored locally on your device</h2>
+  <p>
+    Your blur configurations (which elements to blur on which pages) are stored
+    exclusively on your own device using:
+  </p>
+  <ul>
+    <li><strong>Chrome Storage API</strong> (<code>chrome.storage.local</code>) —
+        persists your settings across browser sessions.</li>
+    <li><strong>localStorage</strong> — used as a cache so blurs are applied
+        instantly on page load without visible delay.</li>
+  </ul>
+  <p>
+    This data never leaves your device. It is not synced to any cloud service,
+    not shared with any third party, and not accessible to any website you visit.
+  </p>
+
+  <h2>Permissions used</h2>
+  <ul>
+    <li><strong>storage</strong> — to save and load your blur configurations.</li>
+    <li><strong>activeTab</strong> — to read the current tab's URL so the popup
+        can display the right page-specific settings.</li>
+    <li><strong>Host permission (&lt;all_urls&gt;)</strong> — required to inject
+        the content script on any website you visit. The extension cannot know
+        in advance which sites you want to configure, so the permission must be
+        broad. No data from any website is collected or transmitted.</li>
+  </ul>
+
+  <h2>Third-party services</h2>
+  <p>PII Blur uses no third-party analytics, advertising, or tracking services.</p>
+
+  <h2>Children's privacy</h2>
+  <p>
+    This extension does not knowingly collect any information from anyone,
+    including children under 13.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy changes, the updated version will be published at this URL
+    and the "Last updated" date above will be revised.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions? Open an issue on the
+    <a href="https://github.com/er-ravipatel/pii-blur">GitHub repository</a>.
+  </p>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+make_icons.py
+*.zip
+.DS_Store
+Thumbs.db

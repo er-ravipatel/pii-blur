@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "PII Blur",
+  "short_name": "PII Blur",
+  "version": "1.0.0",
+  "description": "Blur personal info on any website. Select elements to blur — names, photos, addresses, inputs — and they stay blurred on every visit. Per-page, per-site config saved locally.",
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "PII Blur",
+    "default_icon": {
+      "16":  "icons/icon16.png",
+      "48":  "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "minimum_chrome_version": "102"
+}
