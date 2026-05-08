@@ -3,7 +3,7 @@
   "name": "PII Blur",
   "short_name": "PII Blur",
   "version": "1.0.0",
-  "description": "Blur personal info on any website. Select elements to blur — names, photos, addresses, inputs — and they stay blurred on every visit. Per-page, per-site config saved locally.",
+  "description": "Blur names, photos, addresses and inputs on any website. Per-page config, saved locally. No data collected or shared.",
   "permissions": ["activeTab", "storage"],
   "host_permissions": ["<all_urls>"],
   "content_scripts": [
