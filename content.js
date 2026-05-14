@@ -101,7 +101,17 @@
         ...(root !== document && root.matches?.(item.selector) ? [root] : []),
         ...root.querySelectorAll(item.selector),
       ];
-      nodes.forEach(el => { if (matchesItem(el, item)) blurEl(el, item.intensity || 8); });
+      if (nodes.length > 0) {
+        nodes.forEach(el => { if (matchesItem(el, item)) blurEl(el, item.intensity || 8); });
+        return;
+      }
+      // Fallback: saved selector may contain dynamic class names (e.g. Facebook's atomic CSS)
+      // that change on every page load. Re-query by tag type only — content matching
+      // (exact textContent / alt) still guarantees we only blur the right element.
+      const fallbackTag = item.altMatch ? 'img'
+        : (item.selector.split(/[\s>+~]/).pop().match(/^[a-zA-Z][\w-]*/)?.[0] || '*');
+      root.querySelectorAll(fallbackTag)
+          .forEach(el => { if (matchesItem(el, item)) blurEl(el, item.intensity || 8); });
     } catch (_) {}
   }
 
