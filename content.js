@@ -105,13 +105,16 @@
         nodes.forEach(el => { if (matchesItem(el, item)) blurEl(el, item.intensity || 8); });
         return;
       }
-      // Fallback: saved selector may contain dynamic class names (e.g. Facebook's atomic CSS)
-      // that change on every page load. Re-query by tag type only — content matching
-      // (exact textContent / alt) still guarantees we only blur the right element.
-      const fallbackTag = item.altMatch ? 'img'
+      // Fallback: selector may include dynamic class names (e.g. Facebook's atomic CSS)
+      // that change on every page load. Extract the ID anchor from the saved selector
+      // so the search stays scoped to the same region — not the whole document.
+      const idMatch = item.selector.match(/#([\w-]+)/);
+      const anchor  = idMatch ? document.getElementById(idMatch[1]) : null;
+      const scope   = anchor || (root !== document ? root : document.body || document);
+      const tag     = item.altMatch ? 'img'
         : (item.selector.split(/[\s>+~]/).pop().match(/^[a-zA-Z][\w-]*/)?.[0] || '*');
-      root.querySelectorAll(fallbackTag)
-          .forEach(el => { if (matchesItem(el, item)) blurEl(el, item.intensity || 8); });
+      scope.querySelectorAll(tag)
+           .forEach(el => { if (matchesItem(el, item)) blurEl(el, item.intensity || 8); });
     } catch (_) {}
   }
 
@@ -250,21 +253,18 @@
     return t || el.tagName.toLowerCase();
   }
 
-  // Broad class-based selector (used as a pre-filter for JS items)
+  // Stable selector for JS items — tag name anchored to nearest ID ancestor.
+  // Class names are intentionally excluded: sites like Facebook use dynamically
+  // generated atomic class names that change on every page load.
   function broadSelector(el) {
     if (el.id) return '#' + CSS.escape(el.id);
-    let part = el.tagName.toLowerCase();
-    const cls = [...el.classList]
-      .filter(c => !/^(active|hover|focus|open|visible|hidden|disabled|loading|ng-|js-)/.test(c))
-      .slice(0, 2);
-    if (cls.length) part += '.' + cls.map(c => CSS.escape(c)).join('.');
-    // Anchor to nearest ID ancestor for precision
+    const tag = el.tagName.toLowerCase();
     let anc = el.parentElement;
     while (anc && anc !== document.documentElement) {
-      if (anc.id) return '#' + CSS.escape(anc.id) + ' ' + part;
+      if (anc.id) return '#' + CSS.escape(anc.id) + ' ' + tag;
       anc = anc.parentElement;
     }
-    return part;
+    return tag;
   }
 
   // Structural nth-child selector — only used for <input>/<textarea>
